@@ -48,6 +48,7 @@ function registerCommands(files) {
   yargs.scriptName("vklymniuk-console")
   yargs.usage('Usage: $0 <command> [options]');
   yargs.demandCommand().help().argv;
+
   if (!run) {
     logger.error('No such command found. Run dt-console --help to see the list of commands.');
     process.exit(1);
@@ -63,6 +64,7 @@ function createCommand(module, scriptFile) {
     logger.error(`Command in ${scriptFile} does not have metadata or run exports.`);
     return;
   }
+
   yargs.command({
     command: module.metadata.name,
     desc: module.metadata.description,
@@ -82,6 +84,7 @@ function createCommand(module, scriptFile) {
  */
 async function runCommand(run, {argv, name}) {
   logger.info(`Running ${name}...`);
+
   try {
     await run(argv);
   } catch (e) {
